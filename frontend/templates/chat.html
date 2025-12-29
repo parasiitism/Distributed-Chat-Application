@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Chat Room</h2>
+
+<ul id="messages"></ul>
+
+<input id="message" placeholder="Type message" />
+<button onclick="sendMessage()">Send</button>
+
+<script src="/static/js/chat.js"></script>
+{% endblock %}

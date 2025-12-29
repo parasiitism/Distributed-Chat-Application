@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+
+  backend:
+    build: .
+    depends_on:
+      - redis
+      - mongodb
+    expose:
+      - "8000"
+
+  haproxy:
+    image: haproxy:2.9
+    ports:
+      - "80:80"
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - backend
